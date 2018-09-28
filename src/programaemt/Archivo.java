@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
 
 /**
  * Manejador de archivo tanto de lectura como de escritura para un archivo .txt
- * @author wanyos
+ * @author wanyos-juanjo
  */
 public class Archivo {
     
