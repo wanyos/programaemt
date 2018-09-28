@@ -171,7 +171,6 @@ public class Manager {
             //crear servicio partido
             servicio = new Servicio(linea, turno, fecha_inicio, hora_inicio, fecha_fin, hora_fin, lugarI, lugarF,
                     fecha_inicio_p, hora_inicio_p, fecha_fin_p, hora_fin_p, lugarIP, lugarFP);
-
         }
 
         //guardar los datos en una lista o base datos
