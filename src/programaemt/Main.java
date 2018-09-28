@@ -6,7 +6,7 @@ package programaemt;
 
 
 /**
- * Clase principal del programa, crea los objetos necesarios para su inicio
+ * Clase principal del programa, crea los objetos necesarios para su inicioooooo
  * @author wanyos
  */
 public class Main {
