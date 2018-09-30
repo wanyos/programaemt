@@ -1,30 +1,32 @@
 
-package programaemt;
+package InicioPrograma;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.*;
 
 /**
- * Clase donde esta toda la gráfica del programa
+ * Clase donde se crea la ventana para pedir el nombre del archivo de datos
  * @author wanyos
  */
-public class Ventanas {
+public class PedirArchivo {
     
+    private JFrame ventana_inicio;
+    private JButton btnBuscar;
+    private JTextField txtTexto;
+    private Main m;
     
-    private String nombre_archivo;
-    
-    public String getNombreArchivo(){
-        return this.nombre_archivo;
+    public PedirArchivo(Main m){
+       this.m = m; 
     }
     
     
-    public void VentanaInicio(){
-      JFrame ventana_inicio = new JFrame();
+    
+    public void ventanaInicio(){
+      ventana_inicio = new JFrame();
       ventana_inicio.setLayout(new BorderLayout());
       ventana_inicio.setTitle("Inicio programa");
       ventana_inicio.setLocation(400, 200);
@@ -44,23 +46,22 @@ public class Ventanas {
       panelCen.setLayout(new FlowLayout());
       
       JLabel label = new JLabel("Nombre archivo:  ");
-      JTextField txtTexto = new JTextField(15);
+      txtTexto = new JTextField(15);
       panelCen.add(label);
       panelCen.add(txtTexto);
-      txtTexto.addKeyListener(new PruebaOyente(txtTexto));
+      txtTexto.addKeyListener(new OyenteTeclado());
       
       //Panel inferior
       JPanel panelInf = new JPanel();
       panelInf.setLayout(new FlowLayout());
       
-      JButton btnBuscar = new JButton("Buscar");
+      btnBuscar = new JButton("Buscar");
       JButton btnSalir = new JButton("Salir");
-      btnBuscar.addActionListener(new OyenteBoton(btnBuscar, txtTexto));
+      btnBuscar.addActionListener(new OyenteBoton());
       
       btnSalir.addActionListener(new OyenteBoton());
       panelInf.add(btnBuscar);
       panelInf.add(btnSalir);
-      
       
       //añadir los paneles al Frame
       Container cp = ventana_inicio.getContentPane();
@@ -70,28 +71,24 @@ public class Ventanas {
       ventana_inicio.setVisible(true);
     }
 
+    public void supenderVentana(){
+        this.ventana_inicio.dispose();
+    }
+
+    
     
     
     class OyenteBoton implements ActionListener {
-
-        private JButton btnBuscar;
-        private JTextField texto;
-
+        
         public OyenteBoton() {
             super();
-        }
-
-        public OyenteBoton(JButton btnBuscar, JTextField texto) {
-            this.btnBuscar = btnBuscar;
-            this.texto = texto;
         }
 
         @Override
         public void actionPerformed(ActionEvent e) {
             Object source = e.getSource();
             if (source == btnBuscar) {
-                nombre_archivo = texto.getText();
-                new Manager(nombre_archivo);
+               m.addNombre(txtTexto.getText());   //usa el objeto Main para dar el nombre al archivo
             } else {
                 System.exit(0);
             }
@@ -102,10 +99,8 @@ public class Ventanas {
     
     class OyenteTeclado implements KeyListener {
 
-        private JTextField txtTexto;
-
-        public OyenteTeclado(JTextField txtTexto) {
-            this.txtTexto = txtTexto;
+        public OyenteTeclado() {
+            super();
         }
 
         @Override
@@ -116,8 +111,8 @@ public class Ventanas {
         @Override
         public void keyPressed(KeyEvent e) {
             int codigo = e.getKeyCode();
-            if (codigo == 10) {             //si se pulsa enter se genera el manager
-                new Manager(txtTexto.getText());
+            if (codigo == 10) {                 //si se pulsa enter se genera el manager
+              m.addNombre(txtTexto.getText()); //usa el objeto Main para dar el nombre al archivo
             }
         }
 
@@ -127,25 +122,5 @@ public class Ventanas {
         }
     }
     
-    
-    /**
-     * Probar una clase adaptadora queimplementa la interface KeyListener
-     */
-    class PruebaOyente extends KeyAdapter {
-
-        private JTextField txtTexto;
-
-        public PruebaOyente(JTextField txtTexto) {
-            this.txtTexto = txtTexto;
-        }
-
-        @Override
-        public void keyPressed(KeyEvent e) {
-            int codigo = e.getKeyCode();
-            if (codigo == 10) {             //si se pulsa enter se genera el manager
-                new Manager(txtTexto.getText());
-            }
-        }
-    }
     
 }

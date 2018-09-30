@@ -1,5 +1,5 @@
 
-package programaemt;
+package InicioPrograma;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

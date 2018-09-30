@@ -1,5 +1,5 @@
 
-package programaemt;
+package InicioPrograma;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -9,19 +9,19 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
- * Clase donde se ejecuta la mayor parte del programa
+ * Clase donde se lee el archivo datos, se separan los datos por lineas y se crea el array con los servicios
  * @author wanyos
  */
-public class Manager {
+public class CrearServicios {
     
     
     private String nombre_archivo_entrada;
     private final Archivo archivo;
     private ArrayList<String> array_datos;
-    private ArrayList<Servicio> array_servicios;
+    private ArrayList<Servicio> array_servicios;  //array donde se guardan los servicios ya creados despues de leer el archivo de datos
     
     
-    public Manager(String nombre_archivo_entrada) {
+    public CrearServicios(String nombre_archivo_entrada) {
         archivo = new Archivo();
         array_datos = new ArrayList<>();
         array_servicios = new ArrayList<>();
@@ -36,6 +36,8 @@ public class Manager {
     public ArrayList<String> getArrayDatos(){
         return this.array_datos;
     }
+    
+    
     
     /**
      * Función que crea el nombre y la ruta del archivo a leer
@@ -72,10 +74,10 @@ public class Manager {
  
    
      /**
-     * Inicia el Manager arrancando los métodos necesarios Crea la ruta del
-     * archivo a leer Ordena a la clase archivo leer la ruta del archivo por
-     * medio de SetDatosArray si la ruta no es válida saltara un error, de lo
-     * contrario leera el archivo y guarda los datos en el array.
+     * Inicia el CrearServicios arrancando los métodos necesarios Crea la ruta del
+ archivo a leer Ordena a la clase archivo leer la ruta del archivo por
+ medio de SetDatosArray si la ruta no es válida saltara un error, de lo
+ contrario leera el archivo y guarda los datos en el array.
      */
     private void inicioManager() {
         //asigna la ruta del archivo de entrada donde estan los datos
@@ -85,7 +87,6 @@ public class Manager {
         //lee los datos del array_datos para crear los servicios y guardarlos en el array_servicios
         this.setDatosServicios();
         //realiza los calculos de cada servicio 
-        
     }
 
     
@@ -202,9 +203,5 @@ public class Manager {
         return fech;
     }
     
-    
-    
-    
-
-   
+      
 }
