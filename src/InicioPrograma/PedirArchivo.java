@@ -19,12 +19,16 @@ public class PedirArchivo {
     private JTextField txtTexto;
     private Main m;
     
+    
+    
     public PedirArchivo(Main m){
        this.m = m; 
     }
     
     
-    
+    /**
+     * Crea la ventana inical donde se pide el nombre del archivo de datos
+     */
     public void ventanaInicio(){
       ventana_inicio = new JFrame();
       ventana_inicio.setLayout(new BorderLayout());
@@ -71,6 +75,7 @@ public class PedirArchivo {
       ventana_inicio.setVisible(true);
     }
 
+    
     public void supenderVentana(){
         this.ventana_inicio.dispose();
     }

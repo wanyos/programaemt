@@ -61,14 +61,21 @@ public class Main {
         Main m = new Main();
         //Presenta en pantalla la caja de texto para pedir el nombre del archivo
         PedirArchivo v = new PedirArchivo(m);
+        CrearServicios crear = new CrearServicios();
+        String nombre_archivo;
+        
+        do {
+        //Se lee el archivo y se crean los servicios si el nombre de archivo es valido
         v.ventanaInicio();
         //Recoge el nombre del archivo que ha introducido el usuario
-        String nombre_archivo = m.getNombre();
-        //Se lee el archivo y se crean los servicios
-        CrearServicios crear = new CrearServicios(nombre_archivo);
+         nombre_archivo = m.getNombre();
+        } while(!crear.inicioCrearServicios(nombre_archivo));
+           
         //Mostrar la ventana de menus de la aplicacion y cerrar la inicial
-        v.supenderVentana();
-        VentanaPrincipal ven = new VentanaPrincipal();
+          v.supenderVentana();
+          VentanaPrincipal ven = new VentanaPrincipal();
+        
+        
         
         
         

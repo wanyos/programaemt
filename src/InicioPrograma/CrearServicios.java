@@ -19,24 +19,40 @@ public class CrearServicios {
     private final Archivo archivo;
     private ArrayList<String> array_datos;
     private ArrayList<Servicio> array_servicios;  //array donde se guardan los servicios ya creados despues de leer el archivo de datos
+    private boolean validar;
     
     
-    public CrearServicios(String nombre_archivo_entrada) {
+    public CrearServicios() {
         archivo = new Archivo();
         array_datos = new ArrayList<>();
         array_servicios = new ArrayList<>();
-        this.nombre_archivo_entrada = nombre_archivo_entrada;
-        this.inicioManager();
     }
     
-    public String getNombreArchivo(){
-        return this.nombre_archivo_entrada;
+    
+    /**
+     * Inicia el CrearServicios arrancando los métodos necesarios Crea la ruta del
+     * archivo a leer Ordena a la clase archivo leer la ruta del archivo por
+     * medio de SetDatosArray si la ruta no es válida saltara un error, de lo
+     * contrario leera el archivo y guarda los datos en el array.
+     * @param nombre_archivo
+     * @return 
+     */
+    public boolean inicioCrearServicios(String nombre_archivo) {
+        //crea la ruta del archivo de entrada con los datos del parametro
+        this.setNombreArchivoEntrada(nombre_archivo);
+        //lee los datos del archivo y los guarda en el array_datos
+        this.setDatosArray();
+        if(validar){
+            //lee los datos del array_datos para crear los servicios y guardarlos en el array_servicios si el archivo es valido
+            this.setDatosServicios();
+        }
+        return validar;
     }
+    
     
     public ArrayList<String> getArrayDatos(){
         return this.array_datos;
     }
-    
     
     
     /**
@@ -45,15 +61,14 @@ public class CrearServicios {
      * En caso contrario se necesita la ruta relativa del archivo
      * Vamos a usar siempre el directorio C:\\ para la ubicación del archivo
      * @param nombre_archivo 
-     * @param archivo objeto de la clase Archivo donde se crea la lectura y escritura del archivo
      */
-    private void setNombreArchivoEntrada() {
+    private void setNombreArchivoEntrada(String nombre_archivo) {
         String ruta;
         String path = "C:\\archivo\\";
-        if(archivo.getExisteDirectorio(path)){
-            ruta = "C:\\archivo\\"+nombre_archivo_entrada;    //si en C:\ no existe una carpeta llamada archivo, el archivo se encuentra en el directorio del ejecutable
+        if(archivo.getExisteDirectorio(path) && archivo.comprobarExtension(nombre_archivo)){
+            ruta = "C:\\archivo\\"+nombre_archivo;    //si en C:\ no existe una carpeta llamada archivo, el archivo se encuentra en el directorio del ejecutable
         } else {
-            ruta = nombre_archivo_entrada;
+            ruta = nombre_archivo;
         }
         this.nombre_archivo_entrada = ruta;
     }
@@ -67,30 +82,13 @@ public class CrearServicios {
    private void setDatosArray() {
         try {
             array_datos = archivo.leerArchivo(nombre_archivo_entrada);
+            this.validar = true;
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(), "!!!Error", JOptionPane.ERROR_MESSAGE);
         }
    }
  
-   
-     /**
-     * Inicia el CrearServicios arrancando los métodos necesarios Crea la ruta del
- archivo a leer Ordena a la clase archivo leer la ruta del archivo por
- medio de SetDatosArray si la ruta no es válida saltara un error, de lo
- contrario leera el archivo y guarda los datos en el array.
-     */
-    private void inicioManager() {
-        //asigna la ruta del archivo de entrada donde estan los datos
-        this.setNombreArchivoEntrada();
-        //lee los datos del archivo y los guarda en el array_datos
-        this.setDatosArray();
-        //lee los datos del array_datos para crear los servicios y guardarlos en el array_servicios
-        this.setDatosServicios();
-        //realiza los calculos de cada servicio 
-    }
-
-    
-    
+       
     /**
      * Lee los datos del array y separa los datos necesarios para crear un
      * servicio guarda todos los datos de un servicio en un array y se los pasa
