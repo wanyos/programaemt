@@ -4,6 +4,7 @@ package entrada_datos;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import tratamiento_datos.Servicio;
 
 /**
@@ -186,7 +187,15 @@ public class BaseDatosServicios implements Serializable {
         
         private void setServicio (int month, Servicio s){
             meses[month-1].add(s);
-            System.out.println();
+            this.ordenarListaServicios(month);
+        }
+        
+        /**
+         * Despues de guardar un servicio en la lista del mes esta se ordena de menor a mayor por día
+         * @param month 
+         */
+        private void ordenarListaServicios(int month){
+            Collections.sort(meses[month-1]); 
         }
         
         

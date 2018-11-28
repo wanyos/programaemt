@@ -4,6 +4,7 @@ package menu_principal;
 import java.awt.*;
 import java.util.ArrayList;
 import javax.swing.*;
+import tratamiento_datos.CalculosDia;
 import tratamiento_datos.Servicio;
 
 /**
@@ -14,6 +15,8 @@ public class JDialogMostrarDatosMes extends JDialogMostrar {
     
     public JDialogMostrarDatosMes(ArrayList<Servicio> lista_mes) {
         this.addPanelMes();
+        //Pasar la lista de servicios del mes a la clase CalculosDia para los calculos
+        CalculosDia calculos_dia = new CalculosDia(lista_mes);
     }
     
     /**

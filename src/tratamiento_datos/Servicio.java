@@ -12,7 +12,7 @@ import java.util.Objects;
  * Clase que crea el objeto servicio
  * @author wanyos
  */
-public class Servicio {
+public class Servicio implements Comparable<Servicio> {
     
     private String linea, turno, lugar_inicio, lugar_fin, lugar_inicio_p, lugar_fin_p;
     private LocalDate fecha_inicio, fecha_fin;
@@ -161,6 +161,19 @@ public class Servicio {
         this.hora_fin_p = hora_fin_p;
     }
 
+    public int getDia(){
+       return this.fecha_inicio.getDayOfMonth();
+    }
+    
+    public int getMes(){
+       return this.fecha_inicio.getMonthValue();
+    }
+    
+    public int getYear(){
+        return this.fecha_inicio.getYear();
+    }
+    
+    
     @Override
     public int hashCode() {
         int hash = 3;
@@ -169,25 +182,20 @@ public class Servicio {
         return hash;
     }
 
+    /**
+     * Si las fechas son iguales el servicio es el mismo
+     * @param obj
+     * @return 
+     */
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
+        if(obj instanceof Servicio){
+           if((this.getFecha_inicio() == ((Servicio) obj).getFecha_inicio() && this.getFecha_fin() == ((Servicio) obj).getFecha_fin()) &&
+                   (this.getFecha_inicio_p() == ((Servicio) obj).getFecha_inicio_p() && this.getFecha_fin_p() == ((Servicio) obj).getFecha_fin_p())){
+               return true;
+           } 
         }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Servicio other = (Servicio) obj;
-        if (!Objects.equals(this.linea, other.linea)) {
-            return false;
-        }
-        if (!Objects.equals(this.turno, other.turno)) {
-            return false;
-        }
-        return true;
+        return false;
     }
     
     
@@ -210,6 +218,27 @@ public class Servicio {
     }
     
     
+    /**
+     * Compara si el valor del dia es mayor, menor o igual
+     * @param a
+     * @return a>s = -1    a<s = 1   a==s = 0
+     */
+    @Override
+    public int compareTo(Servicio a){
+        int valor = Integer.MAX_VALUE;
+        int dia_s = this.getDia();
+        int dia_a = a.getDia();
+        if(a.getMes() == this.getMes() && a.getYear() == this.getYear()){
+          if(dia_s < dia_a){
+              return -1;
+          } else if(dia_s > dia_a){
+              return 1;
+          } else {
+              return 0;
+          }
+        }
+        return valor;
+    }
     
     
     

@@ -62,7 +62,7 @@ public class Main {
         Main m = new Main();
         //Presenta en pantalla la caja de texto para pedir el nombre del archivo
         PedirArchivoEntrada v = new PedirArchivoEntrada(m);
-        BaseDatosServicios base_servicios = new BaseDatosServicios();
+        new BaseDatosServicios();
         CrearServicios crear = new CrearServicios();
         String nombre_archivo;
         
@@ -75,7 +75,7 @@ public class Main {
            
         //Mostrar la ventana de menus de la aplicacion y cerrar la inicial
           v.supenderVentana();
-          FrameVentanaPrincipal ven = new FrameVentanaPrincipal();
+          new FrameVentanaPrincipal();
         
         
         

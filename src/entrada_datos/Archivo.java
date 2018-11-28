@@ -17,8 +17,9 @@ import javax.swing.JOptionPane;
  */
 public class Archivo {
     
-    
-    private File archivo;
+    //ruta carpeta donde se ubican los archivos del programa
+    public static String PATH = "C:\\archivo\\";
+    private File archivo_salida;
     
     
     /**
@@ -30,11 +31,11 @@ public class Archivo {
      */
     private void crearArchivo(String nombre_archivo){
         File directorio = new File("C:\\ArchivoSalida");
-        archivo = new File("C:\\ArchivoSalida\\"+nombre_archivo);  //instancia que crea la carpeta 
+        archivo_salida = new File("C:\\ArchivoSalida\\"+nombre_archivo);  //instancia que crea la carpeta 
         if(!directorio.exists()){
             try {
                 directorio.mkdirs();      
-                archivo.createNewFile();
+                archivo_salida.createNewFile();
             } catch (IOException ex) {
               //error en la creación del archivo
               System.out.println(" Error!!!   no se ha creado el archivo...");
@@ -118,8 +119,8 @@ public class Archivo {
         BufferedWriter buffer = null;
         
       try { 
-        if(archivo.exists()) {
-            buffer = new BufferedWriter(new FileWriter(archivo));
+        if(archivo_salida.exists()) {
+            buffer = new BufferedWriter(new FileWriter(archivo_salida));
             
                buffer.write("\r\n");
                buffer.write(" Archivo datos.\r\n");

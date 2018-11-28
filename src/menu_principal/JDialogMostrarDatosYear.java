@@ -2,7 +2,6 @@
 package menu_principal;
 
 import entrada_datos.BaseDatosServicios;
-import java.awt.*;
 import javax.swing.*;
 
 /**

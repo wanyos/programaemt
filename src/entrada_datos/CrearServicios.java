@@ -58,9 +58,8 @@ public class CrearServicios {
      */
     private void setNombreArchivoEntrada(String nombre_archivo) {
         String ruta;
-        String path = "C:\\archivo\\";
-        if(archivo.getExisteDirectorio(path) && archivo.comprobarExtension(nombre_archivo)){
-            ruta = "C:\\archivo\\"+nombre_archivo;    //si en C:\ no existe una carpeta llamada archivo, el archivo se encuentra en el directorio del ejecutable
+        if(archivo.getExisteDirectorio(Archivo.PATH) && archivo.comprobarExtension(nombre_archivo)){
+            ruta = Archivo.PATH+nombre_archivo;    //si en C:\ no existe una carpeta llamada archivo, el archivo se encuentra en el directorio del ejecutable
         } else {
             ruta = nombre_archivo;
         }
@@ -93,7 +92,7 @@ public class CrearServicios {
         for (int a = 0; a < array_datos_entrada.size() - 1; a++) {
             String aux = this.array_datos_entrada.get(a);
             if (!aux.equals("")) {
-                String[] temp = aux.split(":", 2);
+                String [] temp = aux.split(":", 2);
                 datos_servicio.add(temp[1]);
             } else {
                 this.crearServicio(datos_servicio);
